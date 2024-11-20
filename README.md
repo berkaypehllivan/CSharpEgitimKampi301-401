@@ -36,10 +36,70 @@ command we created a new class in the data access layer. When we enter this clas
 **Design Patterns:** Typical solutions to common problems in software design. They are like pre-made blueprints that you can customize to solve a recurrong design problem in your code, but you can't just find a pattern and copy it into your program, as you can do with off-the-shelf functions or libraries. A pattern is not a specific piece of code, but a general concept for solving a specific problem. Patterns are often confused with algorithms, because both concepts describe typical solutions to some known problem. An algorithm always describes a clear set of action that can achieve a goal, while a design pattern model is a higher-level description of a solution. The code for the same pattern applied to two different programmees may be different.
 
 ## 📌 Episode 14: Orm Structure: Create Model with DbFirst in Entity Framework
+This time we started to learn how to use the Database First method instead of Code First on entity framework. Instead of creating all the tables and columns applied in the Code First method with code and transferring them to SQL, we first created the database and tables via SQL and then transferred them to the Visual Studio programme with entity framework. First of all, we created a new form application. Then we created a new database named EgitimKampiEFTravelDb via MSSQL. We created 3 tables in this table as Customer, Location and Guide. After we finished the database, we went to back to Visual Studio and created a new item in the project and this time we clicked on the Data option in the C# Items list and selected the ADO.NET Entity Data Model there. Then, since we will proceed as DbFirst in the window that opens, we selected the first option EF Designer from Database and proceeded. Then we clicked New Connection on the screen that appeared, pasted the Server Name field from the MSSQL app in the server section and activated the Trusted Certificate option below (if we don't activate this option, we can't resume) and in the Select or enter a database name section, we found and added the EgitimKampiEFTravelDb database we created for this project and continued. Then we selected the entity framework 6.x option and continued. Finally. we activated the Tables option on the screen that appeared and pressed Finish button. Thanks to these operations, we have created the same classes that we created with the Code First method in the previous sections with entity framework. The project will be contiuned in the next lesson.
 
+**Notes**
+
+**SysDiagrams Table:** It's a system table created by SQL Server Management Studio that holds database diagrams, relationships between tables (primary key, foreign key, unique key etc.) and visualtions (rows, columns, lines etc.). This table contains only metadata about the diagrams, not business data (customerId, GuideName, etc.).
 
 
 ## 📌 Episode 15: Project Implementation with Entity Framework
+We started this lesson by learning how to update the changes made on the tables we created in the last lesson on Visual Studio. We added a column called Balance to the Customer table and created a new table called Admin. Then, on the diagram page named Model1.edmx in the Visual Studio app, we right-clicked on an empty area and selected Update Model From Database option and activated the Tables option in the window that opened, said finish and successfully brought the changes made on the SQL side to our application with a single click. Then we manually entered 5 new data in the Guide table. We added this data for using in the form application. By comning to the Form1.cs(Design) part of our project, we added 3 textboxes to write Guide Id, Name and Surname to our application, 5 buttons in total as List, Add, Delete, Update and Get by Id at the bottom of them and finally we added a data grid view on the right side of page where the data to be pulled from database will be displayed and we edited the names we will use on the coding of the buttons and textboxes (such as btnListele, txtName, etc.). Then we moved to the code section and wrote the codes of the buttons that will enable the desired function to be fulfilled and finished this lesson. I have specified the button codes and explanations written below. 
+
+**Codes**
+
+public partial class Form1 : Form
+{
+  public Form1()
+  {
+    InitializeComponent();
+  }
+
+  EgitimKampiEFTravelDbEntities db = new EgitimKampiEFTravelDbEntities(); **//In this section, we referenced the Class created in the previous lesson and assigned this information to the db variable.**
+  
+  private void btnList_Click(object sender, EventArgs e) **//This form is the method of the List button we created in our application.**
+  {
+    var values = db.Guide.ToList(); **//With this code, we created a local variable named values and called the ToList method that transfers the information in the Guide class in db to this variable. ToListMethod is a method in the Entity Framework.**
+    dataGridView1.DataSource = values; **//With this code, we assigned the values variable that holds the data we added with ToList to the DataSource of the datagridview we created in the form section, that is, the part that holds the information in it.**
+  }
+
+  private void btnAdd_Click(object sender, EventArgs e) **//This form is the method of the Add button we created in our application.**
+  {
+   Guide guide = new Guide(); **//Here we created a small guide object from the Guide class.**
+   guide.Name = txtName.Text; **//We transferred the text of the information entered in the textBox to the Name information in the guide we created here.**
+   guide.Surname = txtSurname.Text; **//Here we did the same operation for Surname as we did for Name.**
+   db.Guide.Add(guide); **//Here, we sent the guide object to the Guide class in the db using the Add method and created and entered the name and surname data into it.**
+   db.SaveChanges(); **//This code fragment allows us to save the operations done and display them in the datagridview when we say list again.**
+   MessageBox.Show(‘Contacts Added Successfully!’, ‘Warning’, MessageBoxButtons.OK, MessageBoxIcon.Warning); **//This piece of code is used to create an information message.**
+  }
+
+  private void btnDelete_Click(object sender, EventArgs e) **//This form is the method of the Delete button we created in our application.**
+  {
+   int id = int.Parse(txtId.Text); **//Here, it creates a local variable named id and converts the value entered in the Id textbox into int and assigns it.**
+   var removeValue = db.Guide.Find(id); **//Here, a variable named removeValue is defined to hold the data to be deleted, and the id information we created in the Guide class in the db using the Find method is sent and assigned as a parameter.**
+   db.Guide.Remove(removeValue); **//The code fragment here is added as a parameter to the Remove method, which deletes the removeValue variable we have assigned.**
+   db.SaveChanges(); **//This code fragment ensures that the operations performed are saved and we can view them in the datagridview when we say list again.**
+   MessageBox.Show(‘Contacts Deleted Successfully!’, ‘Warning’, MessageBoxButtons.OK, MessageBoxIcon.Warning); **//This piece of code is used to create an information message.**
+  }
+
+  private void btnUpdate_Click(object sender, EventArgs e) **//This form is the method of the Update button we created in our application.**
+  {
+   int id = int.Parse(txtId.Text); **//The same id operation is used again.**
+   var updateValue = db.Guide.Find(id); **//Here, the variable that will hold the data to be updated called updateValue is defined and the id information we created in the Guide class in the db using the Find method is sent and assigned as a parameter.**
+   updateValue.Name = txtName.Text; **//This piece of code transmits the name information in the data assigned in the name textbox.**
+   updateValue.Surname = txtSurname.Text; **//In this code fragment, the surname information in the assigned data transmits the data entered in the surname textbox.**
+   db.SaveChanges();
+   MessageBox.Show(‘Directory Updated Successfully!’, ‘Warning’, MessageBoxButtons.OK, MessageBoxIcon.Warning);
+  }
+
+  private void btnGetById_Click(object sender, EventArgs e) **//This form is the method of the Get By Id button we created in our application.**
+  {
+   int id = int.Parse(txtId.Text); **//The same id operation is used again.**
+   var values = db.Guide.Where(x => x.GuideId == id).ToList(); **//Here the lambda expression in Entity Framework is used. On each row (x), it is queried whether the GuideId value is equal to id and the ToList method is used. The information obtained from the query is                                                                     defined in the variable named values.**
+   dataGridView1.DataSource = values; **//This piece of code defines the values variable to the DataSource part of the datagridview, that is, the place that holds the information in it.**
+  }
+  
+}
 
 
 ## 📌 Episode 16: Entity Framework: Location Operations For The Tour Project
