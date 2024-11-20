@@ -126,9 +126,9 @@ We started this lesson by learning how to update the changes made on the tables 
    
     }
   
-}
-
+    }
+ 
 
 ## 📌 Episode 16: Entity Framework: Location Operations For The Tour Project
-
+This lesson is a repetition of the previous lesson and we applied the same list, add, delete and update operations performed in the Contacts form the Location table.
 
