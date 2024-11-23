@@ -137,6 +137,6 @@ In this lesson, we have learnt to retrieve and use the data in database in diffe
 
 In addition, i would like to explain how i prevented all locations from creating more that 2 digits after the comma in the output of the average price information requested by teacher of this bootcamp is Murat Yücedağ. (I got helped ChatGpt in this quest) First of all, i created a new variable named avgPrice in decimal type and averaged Price data bu using Average() method to this variable, but differently i wrote the (decimal) expression at the beginning of the code, indicating that this incoming data must be in decimal type. (decimal avgPrice = (decimal)db.Location.Average(x => x.Price);) Then, in the text part of the AvgLocationPrice label, i converted the avgPrice variable to both string format as ToString("F2") in it. In this way, incoming average information is written like 120.00 format. You can take a look at the details of this data in the picture below.
 
-
+![image alt](https://github.com/berkaypehllivan/CSharpEgitimKampi301/blob/master/Ekran%20g%C3%B6r%C3%BCnt%C3%BCs%C3%BC%202024-11-23%20163357.png?raw=true)
 
 
