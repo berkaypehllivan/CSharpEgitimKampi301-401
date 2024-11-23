@@ -132,3 +132,11 @@ We started this lesson by learning how to update the changes made on the tables 
 ## 📌 Episode 16: Entity Framework: Location Operations For The Tour Project
 This lesson is a repetition of the previous lesson and we applied the same list, add, delete and update operations performed in the Contacts form the Location table.
 
+## 📌 Episode 17: Entity Framework Methods & Linq Querries
+In this lesson, we have learnt to retrieve and use the data in database in different ways using Linq queries. For this, we created a new form in our project. We added a total of 12 sections to this form where data will be transferred. We pulled data from different tables to these sections. For example, in order to bring the name of the guide of the Lyon tour, we first created a variable by lyonGuideId and int this variable we wrote our code to select the city name is Lyon data and get the GuideId information of the selected data and assigned it to this variable. Then in the text of GuideNameLocationLyon label we first selected the data whose GuideId is equal to lyonGuideId and by taking the name and surname values of this data, we ensured that the first incoming data was successfully retrieved using this FirstOrDefault() method in the Entity Framework, and finally we converted it to string type with ToString() method.
+
+In addition, i would like to explain how i prevented all locations from creating more that 2 digits after the comma in the output of the average price information requested by teacher of this bootcamp is Murat Yücedağ. (I got helped ChatGpt in this quest) First of all, i created a new variable named avgPrice in decimal type and averaged Price data bu using Average() method to this variable, but differently i wrote the (decimal) expression at the beginning of the code, indicating that this incoming data must be in decimal type. (decimal avgPrice = (decimal)db.Location.Average(x => x.Price);) Then, in the text part of the AvgLocationPrice label, i converted the avgPrice variable to both string format as ToString("F2") in it. In this way, incoming average information is written like 120.00 format. You can take a look at the details of this data in the picture below.
+
+
+
+
