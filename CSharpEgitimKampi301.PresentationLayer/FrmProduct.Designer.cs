@@ -43,7 +43,7 @@
             this.txtProductPrice = new System.Windows.Forms.TextBox();
             this.label5 = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
-            this.cbProductCategory = new System.Windows.Forms.ComboBox();
+            this.cmbProductCategory = new System.Windows.Forms.ComboBox();
             this.txtDescription = new System.Windows.Forms.TextBox();
             this.label7 = new System.Windows.Forms.Label();
             this.btnList2 = new System.Windows.Forms.Button();
@@ -68,6 +68,7 @@
             this.btnGetById.TabIndex = 24;
             this.btnGetById.Text = "ID\'ye Göre Getir";
             this.btnGetById.UseVisualStyleBackColor = true;
+            this.btnGetById.Click += new System.EventHandler(this.btnGetById_Click);
             // 
             // btnUpdate
             // 
@@ -77,6 +78,7 @@
             this.btnUpdate.TabIndex = 23;
             this.btnUpdate.Text = "Güncelle";
             this.btnUpdate.UseVisualStyleBackColor = true;
+            this.btnUpdate.Click += new System.EventHandler(this.btnUpdate_Click);
             // 
             // btnDelete
             // 
@@ -86,6 +88,7 @@
             this.btnDelete.TabIndex = 22;
             this.btnDelete.Text = "Sil";
             this.btnDelete.UseVisualStyleBackColor = true;
+            this.btnDelete.Click += new System.EventHandler(this.btnDelete_Click);
             // 
             // btnAdd
             // 
@@ -95,6 +98,7 @@
             this.btnAdd.TabIndex = 21;
             this.btnAdd.Text = "Ekle";
             this.btnAdd.UseVisualStyleBackColor = true;
+            this.btnAdd.Click += new System.EventHandler(this.btnAdd_Click);
             // 
             // btnList
             // 
@@ -179,13 +183,13 @@
             this.label6.TabIndex = 30;
             this.label6.Text = "Kategori:";
             // 
-            // cbProductCategory
+            // cmbProductCategory
             // 
-            this.cbProductCategory.FormattingEnabled = true;
-            this.cbProductCategory.Location = new System.Drawing.Point(101, 116);
-            this.cbProductCategory.Name = "cbProductCategory";
-            this.cbProductCategory.Size = new System.Drawing.Size(154, 21);
-            this.cbProductCategory.TabIndex = 31;
+            this.cmbProductCategory.FormattingEnabled = true;
+            this.cmbProductCategory.Location = new System.Drawing.Point(101, 116);
+            this.cmbProductCategory.Name = "cmbProductCategory";
+            this.cmbProductCategory.Size = new System.Drawing.Size(154, 21);
+            this.cmbProductCategory.TabIndex = 31;
             // 
             // txtDescription
             // 
@@ -223,7 +227,7 @@
             this.Controls.Add(this.btnList2);
             this.Controls.Add(this.txtDescription);
             this.Controls.Add(this.label7);
-            this.Controls.Add(this.cbProductCategory);
+            this.Controls.Add(this.cmbProductCategory);
             this.Controls.Add(this.label6);
             this.Controls.Add(this.txtProductPrice);
             this.Controls.Add(this.label5);
@@ -241,6 +245,7 @@
             this.Controls.Add(this.label1);
             this.Name = "FrmProduct";
             this.Text = "Form1";
+            this.Load += new System.EventHandler(this.FrmProduct_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dgvProduct)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -264,7 +269,7 @@
         private System.Windows.Forms.TextBox txtProductPrice;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Label label6;
-        private System.Windows.Forms.ComboBox cbProductCategory;
+        private System.Windows.Forms.ComboBox cmbProductCategory;
         private System.Windows.Forms.TextBox txtDescription;
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.Button btnList2;
