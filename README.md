@@ -139,4 +139,83 @@ In addition, i would like to explain how i prevented all locations from creating
 
 ![image alt](https://github.com/berkaypehllivan/CSharpEgitimKampi301/blob/master/Ekran%20g%C3%B6r%C3%BCnt%C3%BCs%C3%BC%202024-11-23%20163357.png?raw=true)
 
+## 📌 Episode 18 - EntityState Commands, Generic Repository Class and Ef Classes
+In this lesson, we started by creating a new interface in the **DataAccess** class called **Generic Repository**. This class will be take a T value when called from outside and will inherit from IGenericDal. The T value mus come from a class. Next, we used the Implement Interface method to create the methods in the IGenericDal interface for our Generic Repository interface. We created a new object named context from a previously created class called CampContext. We also created a field named _object, which us of type DbSet and takes a T value.
+
+The purpose was to combine the _object field and the context object when the generic repository class is called. To achieve this, we wrote ctor and pressed the Tab key to create a method named Public GenericRepository. Inside this method, we assigned the value of _object as _object = context.Set<T>(); This way, when the generic repository ckass is called, it creates an instance of _object and assigns an Entity value (like Admin, Product, Category or Order) from the context class to it. After that, we filled in the necessary functions for the methods that came with the implementation and finished our work with the Generic Repository. 
+These classes will create the values for **CRUD** operations using entities in the **Generic Repository**. All CRUD operations will communicate through these classes.
+
+## 📌 Episode 19 - Business Layer and Logic Rules
+In this lessın , we started working on the Business Layer. Inside the Business Layer, we created a folder named Abstract. In this folder, we added a new interface called IGenericService, which takes a T value ensures that this T value must come from a class. Next, we copied the methods from IGenericDal and pasted them into the new created interface. To avoid confusion, we added the letter T at the beginning of each methods name. From the **Presentation Layer**, we will call methods that start with the letter T. This way, instead of directly accessing the **Data Access** layer, we will use **Business** layer as a bridge, ensuring compliance with the architecture. 
+
+For each entity, we create a new interface and made these interfaces inherited from **IGenericService** for their specific classes. (For example, ICategoryService : IGenericService<Category>). We then created a new folder named **Concrete**. In this folder, we cereated classes for the each entities by adding **Manager** to their names (CategoryManager) and made them inherit their corresponding interfaces. To perform CRUD operations in these classes, we needed to call the realted structure from the **Data Access** layer, which is directly connected. This method is called **Dependency Injection** (topic of the next episode). In the **Business** layer, we will be use these classes to define the validation rules for the entities.
+
+**Example Method**
+
+
+    public void TInsert(Customer entity)
+    {
+	    if (entity.CustomerName != "" && entity.CustomerName.Length >= 3 && entity.CustomerCity != null)
+	    {
+		    Ekleme işlemini gerçekleştir
+	    }
+	    else
+	    {
+		    Hata mesajı ver	
+	    }
+    }
+
+For practical purposes, we created a simple form application named FrmCategory based on the category entity. The form has content like the following codes. This is how we finished the lesson.
+
+**Codes:**
+
+    public partial class FrmCategory : Form
+    {
+        private readonly ICategoryService _categoryService;
+
+        public FrmCategory()
+        {
+            _categoryService = new CategoryManager(new EfCategoryDal());
+            InitializeComponent();
+        }
+
+        private void btnList_Click(object sender, EventArgs e)
+        {
+            var categoryValues = _categoryService.TGetAll();
+            dgvCategory.DataSource = categoryValues;
+        }
+
+        private void btnAdd_Click(object sender, EventArgs e)
+        {
+            Category category = new Category();
+            category.CategoryName = txtCategoryName.Text;
+            category.CategoryStatus = true;
+            _categoryService.TInsert(category);
+            MessageBox.Show("Ekleme işlemi başarılı");
+        }
+
+        private void btnDelete_Click(object sender, EventArgs e)
+        {
+            int id = int.Parse(txtCategoryId.Text);
+            var deletedValue = _categoryService.TGetById(id);
+            _categoryService.TDelete(deletedValue);
+            MessageBox.Show("Silme işlemi başarılı");
+        }
+
+        private void btnUpdate_Click(object sender, EventArgs e)
+        {
+            int updatedId = int.Parse(txtCategoryId.Text);
+            var updatedValue = _categoryService.TGetById(updatedId);
+            updatedValue.CategoryName = txtCategoryName.Text;
+            updatedValue.CategoryStatus = true;
+            _categoryService.TUpdate(updatedValue);
+        }
+
+        private void btnGetById_Click(object sender, EventArgs e)
+        {
+            int id = int.Parse(txtCategoryId.Text);
+            var values = _categoryService.TGetById(id);
+            dgvCategory.DataSource = values;
+        }
+    }
 
