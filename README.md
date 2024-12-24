@@ -56,7 +56,7 @@ Then we clicked New Connection on the screen that appeared, pasted the Server Na
 
 
 ## 📌 Episode 15: Project Implementation with Entity Framework
-We started this lesson by learning how to update the changes made on the tables we created in the last lesson on Visual Studio. We added a column called Balance to the customer table and created a new table called admin. Then, on the diagram page named Model1.edmx in the Visual Studio app, we right-clicked on an empty area and selected Update Model From Database option and activated the Tables option in the window that opened, said finish and successfully brought the changes made on the SQL side to our application with a single click. Then we manually entered 5 new data in the guide table. We added this data for using in the form application. By comning to the Form1.cs(Design) part of our project, we added 3 textboxes to write Guide Id, Name and Surname to our application, 5 buttons in total as List, Add, Delete, Update and Get by Id at the bottom of them and finally we added a data grid view on the right side of page where the data to be pulled from database will be displayed and we edited the names we will use on the coding of the buttons and textboxes (such as btnListele, txtName, etc.). Then we moved to the code section and wrote the codes of the buttons that will enable the desired function to be fulfilled and finished this lesson. I have specified the button codes and explanations written below. 
+We started this episode by learning how to update the changes made on the tables we created in the last lesson on Visual Studio. We added a column called Balance to the customer table and created a new table called admin. Then, on the diagram page named Model1.edmx in the Visual Studio app, we right-clicked on an empty area and selected Update Model From Database option and activated the Tables option in the window that opened, said finish and successfully brought the changes made on the SQL side to our application with a single click. Then we manually entered 5 new data in the guide table. We added this data for using in the form application. By comning to the Form1.cs(Design) part of our project, we added 3 textboxes to write Guide Id, Name and Surname to our application, 5 buttons in total as List, Add, Delete, Update and Get by Id at the bottom of them and finally we added a data grid view on the right side of page where the data to be pulled from database will be displayed and we edited the names we will use on the coding of the buttons and textboxes (such as btnListele, txtName, etc.). Then we moved to the code section and wrote the codes of the buttons that will enable the desired function to be fulfilled and finished this lesson. I have specified the button codes and explanations written below. 
 
 **Codes:**
 
@@ -142,23 +142,23 @@ We started this lesson by learning how to update the changes made on the tables 
  
 
 ## 📌 Episode 16: Entity Framework: Location Operations For The Tour Project
-This lesson is a repetition of the previous lesson and we applied the same list, add, delete and update operations performed in the Contacts form the location table.
+This episode is a repetition of the previous lesson and we applied the same list, add, delete and update operations performed in the Contacts form the location table.
 
 ## 📌 Episode 17: Entity Framework Methods & Linq Querries
-In this lesson, we have learnt to retrieve and use the data in database in different ways using **Linq** queries. For this, we created a new form in our project. We added a total of 12 sections to this form where data will be transferred. We pulled data from different tables to these sections. For example, in order to bring the name of the guide of the Lyon tour, we first created a variable by lyonGuideId and int this variable we wrote our code to select the city name is Lyon data and get the GuideId information of the selected data and assigned it to this variable. Then in the text of GuideNameLocationLyon label we first selected the data whose GuideId is equal to lyonGuideId and by taking the name and surname values of this data, we ensured that the first incoming data was successfully retrieved using this FirstOrDefault() method in the **Entity Framework**, and finally we converted it to string type with ToString() method.
+In this episode, we have learnt to retrieve and use the data in database in different ways using **Linq** queries. For this, we created a new form in our project. We added a total of 12 sections to this form where data will be transferred. We pulled data from different tables to these sections. For example, in order to bring the name of the guide of the Lyon tour, we first created a variable by lyonGuideId and int this variable we wrote our code to select the city name is Lyon data and get the GuideId information of the selected data and assigned it to this variable. Then in the text of GuideNameLocationLyon label we first selected the data whose GuideId is equal to lyonGuideId and by taking the name and surname values of this data, we ensured that the first incoming data was successfully retrieved using this FirstOrDefault() method in the **Entity Framework**, and finally we converted it to string type with ToString() method.
 
 In addition, i would like to explain how i prevented all locations from creating more that 2 digits after the comma in the output of the average price information requested by teacher of this bootcamp is **Murat Yücedağ**. (I got helped ChatGpt in this quest) First of all, i created a new variable named avgPrice in decimal type and averaged Price data bu using Average() method to this variable, but differently i wrote the (decimal) expression at the beginning of the code, indicating that this incoming data must be in decimal type. (decimal avgPrice = (decimal)db.Location.Average(x => x.Price);) Then, in the text part of the AvgLocationPrice label, i converted the avgPrice variable to both string format as ToString("F2") in it. In this way, incoming average information is written like 120.00 format. You can take a look at the details of this data in the picture below.
 
 ![image alt](https://github.com/berkaypehllivan/CSharpEgitimKampi301/blob/master/Ekran%20g%C3%B6r%C3%BCnt%C3%BCs%C3%BC%202024-11-23%20163357.png?raw=true)
 
 ## 📌 Episode 18 - EntityState Commands, Generic Repository Class and Ef Classes
-In this lesson, we started by creating a new interface in the **DataAccess** class called **Generic Repository**. This class will be take a T value when called from outside and will inherit from IGenericDal. The T value mus come from a class. Next, we used the Implement Interface method to create the methods in the IGenericDal interface for our Generic Repository interface. We created a new object named context from a previously created class called CampContext. We also created a field named _object, which us of type DbSet and takes a T value.
+In this episode, we started by creating a new interface in the **DataAccess** class called **Generic Repository**. This class will be take a T value when called from outside and will inherit from IGenericDal. The T value mus come from a class. Next, we used the Implement Interface method to create the methods in the IGenericDal interface for our Generic Repository interface. We created a new object named context from a previously created class called CampContext. We also created a field named _object, which us of type DbSet and takes a T value.
 
 The purpose was to combine the _object field and the context object when the generic repository class is called. To achieve this, we wrote ctor and pressed the Tab key to create a method named Public GenericRepository. Inside this method, we assigned the value of _object as _object = context.Set<T>(); This way, when the generic repository ckass is called, it creates an instance of _object and assigns an Entity value (like Admin, Product, Category or Order) from the context class to it. After that, we filled in the necessary functions for the methods that came with the implementation and finished our work with the Generic Repository. 
 These classes will create the values for **CRUD** operations using entities in the **Generic Repository**. All CRUD operations will communicate through these classes.
 
 ## 📌 Episode 19 - Business Layer and Logic Rules
-In this lessın , we started working on the Business Layer. Inside the Business Layer, we created a folder named Abstract. In this folder, we added a new interface called IGenericService, which takes a T value ensures that this T value must come from a class. Next, we copied the methods from IGenericDal and pasted them into the new created interface. To avoid confusion, we added the letter T at the beginning of each methods name. From the **Presentation Layer**, we will call methods that start with the letter T. This way, instead of directly accessing the **Data Access** layer, we will use **Business** layer as a bridge, ensuring compliance with the architecture. 
+In this episode , we started working on the Business Layer. Inside the Business Layer, we created a folder named Abstract. In this folder, we added a new interface called IGenericService, which takes a T value ensures that this T value must come from a class. Next, we copied the methods from IGenericDal and pasted them into the new created interface. To avoid confusion, we added the letter T at the beginning of each methods name. From the **Presentation Layer**, we will call methods that start with the letter T. This way, instead of directly accessing the **Data Access** layer, we will use **Business** layer as a bridge, ensuring compliance with the architecture. 
 
 For each entity, we create a new interface and made these interfaces inherited from **IGenericService** for their specific classes. (For example, ICategoryService : IGenericService<Category>). We then created a new folder named **Concrete**. In this folder, we cereated classes for the each entities by adding **Manager** to their names (CategoryManager) and made them inherit their corresponding interfaces. To perform CRUD operations in these classes, we needed to call the realted structure from the **Data Access** layer, which is directly connected. This method is called **Dependency Injection** (topic of the next episode). In the **Business** layer, we will be use these classes to define the validation rules for the entities.
 
@@ -231,3 +231,82 @@ For practical purposes, we created a simple form application named FrmCategory b
         }
     }
 
+## 📌 Episode 20 - Dependency Injection
+**Dependency Injection** is based on the principle of providing (injecting) the objects that an object needs from the outside instead of creating them inside itself. This reduces dependencies between projects, increases testability and makes the code more modular.
+
+**Constructor Methods** are special methods that are initiated when an object is created. They are typically used to set the initial state of the object. When used with **Dependency Injection**, constructor methods take rhe dependencies of the object as parameters. In this way, dependencies are injected when the object is created.
+
+In summary, **Dependency Injection** and **Constructor Methods** are important concepts in modern software development that improve code quality. They help in creating applications that are easier to maintain, test and extend.
+
+We finished the theoretical part of the episode and started applying the topics of constructors and dependency injection. In the OrderManager class, we created a field like **private readonly IOrderDal _orderDal**. Then we pressed Alt + Enter and selected the generate constructor option from the list. Visual Studio automatically prepared the constructor method we needed. 
+
+Afterward, we coded the required functions for the methods we implemented. We repeated these steps for the category, customer and product entities by creating their respective Manager classes. The main goal is this part of the episode was to avoid direct access from the **Presentation(UI)** layer to **DataAccess** layer. Instead, we used the **Business** layer as a bridge to ensure that we followed the architecture properly.
+
+    public class OrderManager : IOrderService
+    {
+        private readonly IOrderDal _orderDal;
+
+        public OrderManager(IOrderDal orderDal)
+        {
+            _orderDal = orderDal;
+        }
+
+        public void TDelete(Order entity)
+        {
+            _orderDal.Delete(entity);
+        }
+
+        public List<Order> TGetAll()
+        {
+            return _orderDal.GetAll();
+        }
+
+        public Order TGetById(int Id)
+        {
+            return _orderDal.GetById(Id);
+        }
+
+        public void TInsert(Order entity)
+        {
+            _orderDal.Insert(entity);
+        }
+
+        public void TUpdate(Order entity)
+        {
+            _orderDal.Update(entity);
+        }
+
+ 
+In the second part of the episode, we added about 10 data to the category table in our database using SQL. We will use these entries in the from application to reinforce the topic. After adding the data, we double clicked the list button in the form application to go form's code section. Inside the class, we created a field named **private readonly ICategoryService _categoryService** and generated the constructor method. In this constructor, we added InilializeComponent(); function. Then we deleted the empty public FrmCategory() method that was left.
+
+At this point, we cannot run the code directly because our FrmCategory class has now been converted to a format that requires a parameter. To fix this problem we deleted the parameter in the constructor method and manually created the objects for CategoryManager and EfCategoryDal in the _categoryService field. We changed the code to: **_categoryService = new CategoryManager(new EfCategoryDal());**
+
+Next we navigated to EfCategoryDal, pressed Alt + Enter and added a referance to the **DataAccess** layer. This resolved the referance problem in EfCategoryDal and we completed this part of task. After completing the important steps for this part of episode, we moved on to adding other functionalities to the form and completed this episode.
+
+## 📌 Episode 21 - Writing Entity Specific Method
+In this episode we worked on writing methods specific to an entity. First we designed a new form for the product table and added about 10 data to the product table using SQL to set up the base. After that we went to code section of the form by clicking the list button an object with the following code: **ProductManager productManager = new ProductManager(new EfProductDal());** 
+
+We then wrote the necessary code for listing and open the application. However, we encountered a problem: since the category table is realted to the product table, it appeared as a separate column in the data grid. To solve this problem we wrote a method specific to the entity. In the IProductDal interface located in the **Abstract** folder of the **DataAccess** layer, we added this code: **List<Product> GetProductsWithCategory();** This method is designed to retrieve products along with their categories. Next we opened the EfProductDal class in the EntityFramework folder of the same layer and included our interface.
+
+Similar to the **Generic Repository** we needed a context here, but this context would be specific to entity. We started by creating an object from the CampContext class: **var context = new CampContext();** After this we wrote the necessary code for the method. Since we needed an extra column for category name, we used a method named [NotMapped].
+
+**Codes:**
+
+            var context = new CampContext();
+            var values = context.Products.Select
+                (x => new
+                {
+                    ProductId = x.ProductId,
+                    ProductName = x.ProductName,
+                    ProductStock = x.ProductStock,
+                    ProductPrice = x.ProductPrice,
+                    ProductDescription = x.ProductDescription,
+                    CategoryName = x.Category.CategoryName
+                }).ToList();
+
+            return values;
+
+We went to the product class and added the [NotMapped] attribute. Below it, we created a CategoryName property. After this we copied the **List<Product> GetProductsWithCategory()** method from EfProductDal and pasted it into the IProductService interface in the **Business** layer, adding a T to the beggining of the method name. We then implemented in the ProductManager class and wrote the following code: **return _productDal.GetProductsWithCategory();** Since this method is specific to the product entity, it can't be used for other entities in this project. To test the new system, we added a new list button to the form application. When we tried listing we encountered a another error. To try a different approach, we commented out the [NotMapped] attribute and the CategoryName property in the product class. Then we replaced **List<Product> to List<Object>** in all related areas, including IProductDal, ProductManager and IProductService. Because we wanted the method to work with an anonymous value, whe changed it to object type value. Finally we updated the return values line as following code: **return values.Cast<Object>().ToList();** This allowed us to successfully complete the listing process and we finished here this episode.
+
+## 📌 Episode 22 - Using Dapper in C#
+In this episode we completed form project that we started in previous episode, finished the form project. Then we moved on to the new part of this course, the 501 module. **You can access the 501 module from my Github profile.**
