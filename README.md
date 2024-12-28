@@ -1,4 +1,4 @@
-# C# BOOTCAMP SECTION 301
+# C# BOOTCAMP SECTION 301 & 401
 **This repository is based on C# Bootcamp published by Murat Yücedağ on Youtube and is a continuation of the previous 101-201 repository. You can browse the details covered in each section from the bottom.**
 
 ## 📌 Episode 11: Module OOP: N Architecture Entity Layer with C#
